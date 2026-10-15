@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TeaGuard — Specimen Journey</title>
+  <style>
+    :root{--forest:#173f2b;--pine:#245c3c;--leaf:#3f7952;--sage:#dbe4d6;--paper:#f6f2e8;--cream:#fffdf7;--ink:#18231c;--muted:#59665d;--line:#c8ccbf;--gold:#c89c49;--white:#fff}
+    *{box-sizing:border-box}
+    html,body{margin:0;width:100%;height:100%;background:#d9d6cc;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+    body{overflow:hidden;display:grid;place-items:center}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,label:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .frame{width:1440px;height:900px;overflow:hidden;background:var(--paper);position:relative}
+    .topbar{height:86px;padding:0 72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:var(--cream)}
+    .brand{display:flex;align-items:center;gap:14px;color:var(--forest)}
+    .brand-mark{width:40px;height:40px;border:1px solid var(--pine);display:grid;place-items:center;border-radius:12px}
+    .brand-mark svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .brand strong{display:block;font-family:Georgia,serif;font-size:25px;letter-spacing:-.02em}
+    .brand span{display:block;margin-top:2px;color:var(--muted);font-size:12px}
+    nav{display:flex;align-items:center;gap:8px}
+    nav button{height:42px;padding:0 17px;border:0;background:transparent;color:var(--muted);border-radius:10px;font-weight:700}
+    nav .active{background:var(--sage);color:var(--forest)}
+    nav .secondary{margin-left:10px;border:1px solid var(--line);background:var(--cream)}
+    main{width:1296px;margin:0 auto;padding-top:38px}
+    .intro{display:flex;align-items:end;justify-content:space-between;margin-bottom:25px}
+    h1{margin:0;max-width:720px;font-family:Georgia,serif;font-size:50px;line-height:1.02;letter-spacing:-.035em;color:var(--forest);font-weight:700}
+    .intro p{width:390px;margin:0 0 4px;color:var(--muted);font-size:16px;line-height:1.55}
+    .rail{height:110px;display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--forest);color:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 12px 28px rgba(23,63,43,.14)}
+    .stage{position:relative;padding:22px 30px;display:flex;align-items:center;gap:18px}
+    .stage+.stage{border-left:1px dashed rgba(255,255,255,.38)}
+    .stage:not(:last-child)::after{content:"→";position:absolute;right:-15px;top:39px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--paper);color:var(--forest);z-index:2;font-weight:800}
+    .stage-index{font:700 13px/1 Arial,sans-serif;color:#bfd2c3;letter-spacing:.12em}
+    .stage b{display:block;margin-bottom:7px;font-size:17px}
+    .stage span{display:block;color:#d8e3da;font-size:13px;line-height:1.35}
+    .stage.current{background:#1e4d34}
+    .workspace{margin-top:24px;display:grid;grid-template-columns:minmax(0,2fr) 390px;gap:24px;height:482px}
+    .upload{position:relative;background:var(--cream);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 12px 32px rgba(49,55,45,.08)}
+    .upload-head{height:58px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+    .upload-head strong{font-size:15px;color:var(--forest)}
+    .status{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+    .status::before{content:"";width:8px;height:8px;border-radius:50%;background:#9da69c}
+    .drop-zone{margin:20px;height:325px;border:2px dashed #8ea08e;border-radius:12px;background:#faf8f0;display:grid;place-items:center;text-align:center}
+    .drop-inner{max-width:440px}
+    .leaf-icon{width:66px;height:66px;margin:0 auto 15px;color:var(--pine)}
+    .leaf-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+    .drop-inner h2{margin:0 0 8px;font:700 25px/1.2 Georgia,serif;color:var(--forest)}
+    .drop-inner p{margin:0 0 17px;color:var(--muted);font-size:14px}
+    .file-input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .file-button{display:inline-flex;min-height:46px;align-items:center;padding:0 22px;background:var(--pine);color:var(--white);border-radius:10px;font-weight:800;cursor:pointer}
+    .formats{display:block;margin-top:12px;color:#6b756d;font-size:12px}
+    .photo-tips{height:58px;padding:0 24px;display:flex;align-items:center;gap:26px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .photo-tips b{color:var(--forest)}
+    .photo-tips span+span{padding-left:26px;border-left:1px solid var(--line)}
+    aside{background:#ebe8dc;border-radius:14px;padding:28px 28px 24px;display:flex;flex-direction:column}
+    aside h2{margin:0 0 11px;font:700 25px/1.2 Georgia,serif;color:var(--forest)}
+    aside>p{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.55}
+    ul{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+    li{padding:14px 0 14px 31px;position:relative;border-bottom:1px solid var(--line);font-size:14px;line-height:1.35}
+    li::before{content:"";position:absolute;left:3px;top:16px;width:14px;height:9px;border-left:2px solid var(--leaf);border-bottom:2px solid var(--leaf);transform:rotate(-45deg)}
+    .actions{margin-top:auto}
+    .analyze{width:100%;min-height:50px;border:0;border-radius:10px;background:#b8beb5;color:#f8faf7;font-weight:800}
+    .analyze[disabled]{cursor:not-allowed}
+    .actions p{margin:10px 0 0;text-align:center;color:var(--muted);font-size:12px}
+    footer{position:absolute;left:72px;right:72px;bottom:19px;display:flex;justify-content:space-between;color:#687168;font-size:12px}
+    ::selection{background:#b7ccb9;color:var(--forest)}
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.7 6.8 7.8 5.2 13.1c-1.1 3.6 1.4 6.5 4.8 5.6 5.2-1.4 8.3-6.6 9.5-14.2Z"/><path d="M4.5 20c2.6-4.6 6.1-7.6 10.8-9.7"/></svg></span>
+        <span><strong>TeaGuard</strong><span>Leaf health analysis with explainable AI</span></span>
+      </div>
+      <nav aria-label="Primary navigation">
+        <button class="active" aria-current="page">Analyze</button>
+        <button>History</button>
+        <button class="secondary">Model info</button>
+      </nav>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">Start with one clear leaf photograph.</h1>
+        <p>TeaGuard classifies visible tea leaf conditions and shows the image regions that influenced its prediction.</p>
+      </section>
+      <section class="rail" aria-label="Analysis workflow">
+        <div class="stage current"><span class="stage-index">01</span><span><b>Photo</b>Select a clear image of one leaf</span></div>
+        <div class="stage"><span class="stage-index">02</span><span><b>Analyze</b>Run ResNet50 classification</span></div>
+        <div class="stage"><span class="stage-index">03</span><span><b>Evidence</b>Review confidence and Grad-CAM</span></div>
+      </section>
+      <section class="workspace" aria-label="Upload a tea leaf photo">
+        <div class="upload">
+          <div class="upload-head"><strong>Leaf photograph</strong><span class="status">No photo selected</span></div>
+          <div class="drop-zone">
+            <div class="drop-inner">
+              <div class="leaf-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M53 10C34 10.5 19 17 14.5 31.5 11.4 41.6 18.6 50 28 47.7 42 44.3 50.8 29.7 53 10Z"/><path d="M10 54c7.4-13.1 17.6-21.8 31-27.5"/></svg></div>
+              <h2>Choose a tea leaf photo</h2>
+              <p>Drag and drop an image here, or select one from your device.</p>
+              <input class="file-input" id="leaf-photo" type="file" accept="image/jpeg,image/png,image/webp">
+              <label class="file-button" for="leaf-photo" tabindex="0">Choose photo</label>
+              <span class="formats">JPG, PNG or WEBP</span>
+            </div>
+          </div>
+          <div class="photo-tips"><b>For a useful result</b><span>Use even daylight</span><span>Keep the whole leaf visible</span><span>Hold the camera steady</span></div>
+        </div>
+        <aside>
+          <h2>A useful photograph</h2>
+          <p>A sharp, unobstructed leaf gives the model the strongest evidence to inspect.</p>
+          <ul>
+            <li>Place one leaf against a plain surface.</li>
+            <li>Avoid deep shadows, glare and digital filters.</li>
+            <li>Include the affected area without cropping it.</li>
+          </ul>
+          <div class="actions">
+            <button class="analyze" type="button" disabled>Analyze leaf</button>
+            <p>Select a photo to enable analysis.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <footer><span>TeaGuard diagnostic workspace</span><span>ResNet50 classification · Grad-CAM evidence</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TeaGuard dashboard direction</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;width:1440px;height:900px;overflow:hidden;background:#f6faf7;color:#1f2937;font:16px Arial,sans-serif}.page{width:1180px;margin:auto;padding:34px 0}.brand{text-align:center}.brand h1{margin:0;color:#166534;font-size:44px}.brand p{margin:10px 0 25px;color:#567362}.tabs{display:flex;justify-content:center;gap:10px;margin-bottom:30px}.tabs span{padding:11px 24px;border:1px solid #cddfd2;border-radius:999px;background:white;font-weight:700;color:#496656}.tabs .on{border-color:#2d8b4f;background:#eaf6ed;color:#166534}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.card{background:#fff;border:1px solid #d8e4da;border-radius:20px;box-shadow:0 10px 30px rgba(30,70,45,.08)}.drop{height:370px;border:2px dashed #a9c8b1;display:flex;align-items:center;justify-content:center;text-align:center}.drop b{display:block;font-size:22px;margin-bottom:10px}.drop p{color:#6b7c70}.leaf{font-size:56px;color:#237d45}.button{margin-top:18px;background:#166534;color:#fff;padding:16px;border-radius:14px;text-align:center;font-weight:800}.empty{height:226px;display:flex;align-items:center;justify-content:center;text-align:center;color:#6b7c70}.empty b{display:block;color:#25392b;font-size:21px;margin-bottom:8px}.head{padding:19px 22px;border-bottom:1px solid #e1eae3;font-weight:800}.visual{margin-top:18px;height:222px}.visual .body{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:15px}.placeholder{height:130px;background:#edf4ef;border:1px solid #d8e4da;border-radius:14px}.label{font-size:12px;font-weight:800;color:#53705c;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand"><h1>TeaGuard</h1><p>Explainable AI tea leaf disease detection</p></header>
+    <nav class="tabs"><span class="on">Detect disease</span><span>History</span><span>Model info</span></nav>
+    <section class="grid">
+      <div>
+        <div class="card drop"><div><div class="leaf">●</div><b>Upload tea leaf image</b><p>Drop an image or browse files</p></div></div>
+        <div class="button">Analyze leaf</div>
+        <div class="card visual"><div class="head">Grad-CAM visualization</div><div class="body"><div><div class="label">Original image</div><div class="placeholder"></div></div><div><div class="label">Grad-CAM heatmap</div><div class="placeholder"></div></div></div></div>
+      </div>
+      <div class="card empty"><div><b>No prediction yet</b><span>Upload a tea leaf image and run analysis.</span></div></div>
+    </section>
+  </main>
+</body>
+</html>

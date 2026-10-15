@@ -1,0 +1,83 @@
+{
+  "appUrl": "http://127.0.0.1:5173/",
+  "uploadFixture": "4._Helopeltis_pred_4._Helopeltis_1_95.3.jpg",
+  "mockConfidenceInput": 0.953,
+  "renderedConfidence": "95.30%",
+  "busyState": {
+    "fileInputDisabled": true,
+    "fileInputTabIndex": -1,
+    "navigationDisabled": true,
+    "previewActionsDisabled": true,
+    "droppedReplacementBlocked": true
+  },
+  "desktop": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "scrollWidth": 1440,
+    "frames": [
+      {
+        "width": 578,
+        "height": 434
+      },
+      {
+        "width": 578,
+        "height": 434
+      }
+    ],
+    "images": [
+      {
+        "naturalWidth": 224,
+        "naturalHeight": 224,
+        "width": 578,
+        "height": 434,
+        "objectFit": "contain"
+      },
+      {
+        "naturalWidth": 224,
+        "naturalHeight": 224,
+        "width": 578,
+        "height": 434,
+        "objectFit": "contain"
+      }
+    ],
+    "focusedElement": "result-title",
+    "focusOutline": "2px solid",
+    "undersizedTargets": []
+  },
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "scrollWidth": 390,
+    "resultVisible": true,
+    "dialogOpen": false
+  },
+  "dialog": {
+    "open": true,
+    "labelledBy": "dialog-title",
+    "activeText": "Close",
+    "focusAfterClose": "Enlarge original leaf"
+  },
+  "mobileDialog": {
+    "open": true,
+    "labelledBy": "dialog-title",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "scrollWidth": 390
+  },
+  "secondaryViews": {
+    "history": {
+      "opened": true,
+      "entries": 1
+    },
+    "model": {
+      "opened": true
+    },
+    "returnedToResult": true
+  }
+}
